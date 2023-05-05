@@ -4,6 +4,7 @@ import { Pie } from 'react-chartjs-2';
 
 
 const PieChart = (props) => {
+    console.log("Pie", props)
     const [contrys, setContrys] = useState([])
     const [counts, setCounts] = useState([])
     ChartJS.register(ArcElement, Tooltip, Legend);
@@ -46,7 +47,7 @@ const PieChart = (props) => {
     }
     useEffect(() => {
         filterFunction();
-    }, [])
+    }, [props.myData])
 
     return (
 

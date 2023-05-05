@@ -1,6 +1,6 @@
 {
-  "homepage": "https://jaypratap619.github.io/dashboard-app",
   "name": "dashboard-app",
+  "homepage": "https://jaypratap619.github.io/dashboard-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
