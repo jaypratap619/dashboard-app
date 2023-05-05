@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
-
+import { Grid , Item} from '@mui/material';
+import { Card , CardContent, Typography} from "@mui/material"
+import {Box} from "@mui/system"
 
 const PieChart = (props) => {
     console.log("Pie", props)
@@ -37,11 +39,17 @@ const PieChart = (props) => {
     const filterFunction = () => {
         const map1 = new Map();
         props?.myData.map(d => {
+            if(d.country === '')
+            {
+                d.country = 'unknown'
+            }
             if (map1.has(d.country))
                 map1.set(d.country, map1.get(d.country) + 1)
             else
                 map1.set(d.country, 1)
         })
+
+        console.log('number of country', map1.size)
         setContrys([...map1.keys()].slice(0,10))
         setCounts([...map1.values()].slice(0,10))
     }
@@ -51,7 +59,14 @@ const PieChart = (props) => {
 
     return (
 
-        <Pie data={data} />
+        <Grid item xs={4}>
+        <Card style={{ backgroudColor: '#F0E2E2' }}>
+          <CardContent>
+            <Pie data={data} />
+          </CardContent>
+        </Card>
+      </Grid>
+        
     )
 }
 

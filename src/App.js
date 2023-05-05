@@ -1,10 +1,16 @@
 import { useEffect, useState } from 'react';
-// import './App.css';
+import './App.css';
+import { Grid, ThemeProvider, colors } from '@mui/material';
+import { createTheme } from '@mui/material/styles';
+
 import axios from 'axios';
 import PieChart from './components/PieChart';
 import BarChart from './components/BarChart';
+import ScatterChart from './components/ScatterChart';
 
 const baseURL = "http://localhost:5000/api"
+
+
 
 
 function App() {
@@ -19,16 +25,20 @@ function App() {
       })
       .catch(error => setIsError(error.message))
   }, [])
-
+  // {isError !== "" && <h2>{isError}</h2>}
 
 
   return (
-    <div>
-     { console.log(myData)}
-      {isError !== "" && <h2>{isError}</h2>}
+    <div className='app'>
+     <Grid container spacing={2}>
+     
       <PieChart myData={myData} />
-      <BarChart myData={myData} />
+      <BarChart myData={myData}/>
+      <ScatterChart myData={myData}/>
+     
+    </Grid>
     </div>
+
   );
 }
 

@@ -1,4 +1,7 @@
 import React, {useState, useEffect} from 'react';
+import { Grid , Item} from '@mui/material';
+import { Card , CardContent, Typography} from "@mui/material"
+import {Box} from "@mui/system"
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -69,7 +72,13 @@ const BarChart = (props) => {
         filterFunction();
     }, [props.myData])
     return (
-        <Bar options={options} data={data} />
+        <Grid item xs={4}>
+        <Card style={{ backgroudColor: '#F0E2E2' }}>
+          <CardContent>
+            <Bar options={options} data={data} />
+          </CardContent>
+        </Card>
+      </Grid>
     )
 }
 
