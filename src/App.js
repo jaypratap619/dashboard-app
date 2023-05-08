@@ -7,6 +7,7 @@ import axios from 'axios';
 import PieChart from './components/PieChart';
 import BarChart from './components/BarChart';
 import ScatterChart from './components/ScatterChart';
+import DoughnutChart from './components/DoughnutChart';
 
 const baseURL = "http://localhost:5000/api"
 
@@ -30,12 +31,12 @@ function App() {
 
   return (
     <div className='app'>
-     <Grid container spacing={2}>
+     <Grid container padding={2} spacing={3}>
      
-      <PieChart myData={myData} />
+      <PieChart  myData={myData} />
       <BarChart myData={myData}/>
+      <DoughnutChart myData= {myData} />
       <ScatterChart myData={myData}/>
-     
     </Grid>
     </div>
 

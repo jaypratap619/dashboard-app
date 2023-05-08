@@ -40,6 +40,7 @@ const BarChart = (props) => {
                 text: 'Relation between likelihood and number of predictions',
             },
         },
+        maintainAspectRatio: false
     };
     
     const labels = likelihood;
@@ -72,10 +73,10 @@ const BarChart = (props) => {
         filterFunction();
     }, [props.myData])
     return (
-        <Grid item xs={4}>
+        <Grid item xs={6}>
         <Card style={{ backgroudColor: '#F0E2E2' }}>
           <CardContent>
-            <Bar options={options} data={data} />
+            <Bar height={360} options={options} data={data} />
           </CardContent>
         </Card>
       </Grid>

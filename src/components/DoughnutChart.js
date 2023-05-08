@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react'
+
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Pie } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 import { Grid, Item } from '@mui/material';
 import { Card, CardContent, Typography } from "@mui/material"
-import { Box } from "@mui/system"
 
-const PieChart = (props) => {
-    console.log("Pie", props)
-    const [contrys, setContrys] = useState([])
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+
+const DoughnutChart = (props) => {
+    const [sectors, setSectors] = useState([])
     const [counts, setCounts] = useState([])
-    ChartJS.register(ArcElement, Tooltip, Legend);
     const options = {
         responsive: true,
         plugins: {
@@ -18,16 +19,16 @@ const PieChart = (props) => {
             },
             title: {
                 display: true,
-                text: 'Number of predictions from each countries',
+                text: 'Number of predictions from each sector',
             },
         },
         maintainAspectRatio: false
     }
     const data = {
-        labels: contrys,
+        labels: sectors,
         datasets: [
             {
-                label: '# of predictions',
+                label: '# of Predictions',
                 data: counts,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -52,28 +53,27 @@ const PieChart = (props) => {
     const filterFunction = () => {
         const map1 = new Map();
         props?.myData.map(d => {
-            if (d.country !== "") {
-                if (map1.has(d.country))
-                    map1.set(d.country, map1.get(d.country) + 1)
+            if (d.sector !== "") {
+                if (map1.has(d.sector))
+                    map1.set(d.sector, map1.get(d.sector) + 1)
                 else
-                    map1.set(d.country, 1)
+                    map1.set(d.sector, 1)
             }
         })
 
-        console.log('number of country', map1.size)
-        setContrys([...map1.keys()].slice(0, 10))
-        setCounts([...map1.values()].slice(0, 10))
+        console.log('number of sector', map1.size)
+        setSectors([...map1.keys()])
+        setCounts([...map1.values()])
     }
     useEffect(() => {
         filterFunction();
     }, [props.myData])
-
     return (
 
         <Grid item xs={6}>
             <Card style={{ backgroudColor: '#F0E2E2' }}>
                 <CardContent>
-                    <Pie height={360} options={options} data={data} />
+                    <Doughnut height={360} options={options} data={data} />
                 </CardContent>
             </Card>
         </Grid>
@@ -81,6 +81,4 @@ const PieChart = (props) => {
     )
 }
 
-
-
-export default PieChart
+export default DoughnutChart
